@@ -43,15 +43,14 @@ namespace OrderForm
             }
             else
             {
-                app.UseExceptionHandler("home/error");
+                app.UseExceptionHandler("/error");
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            // app.UseDefaultFiles();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             
             app.UseRouting();
-            // app.UseAuthorization();
             
             app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
             app.Map("/error", ap => ap.Run(async (context) =>
@@ -63,7 +62,7 @@ namespace OrderForm
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Orders}/{action=OrderForm}");
             });
         }
     }

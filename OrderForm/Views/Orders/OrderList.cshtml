@@ -1,0 +1,43 @@
+@model IEnumerable<OrderForm.Models.Order>
+
+@{
+    ViewData["Title"] = "Список заказов";
+}
+
+<a asp-action="OrderForm">Добавить заказ</a>
+
+<h2>Список заказов:</h2>
+<table border="1">
+    @foreach (var order in Model)
+    {
+        <tr>
+            <th>ID</th><th>Город отправителя</th><th>Адрес отправителя</th><th>Город получателя</th><th>Адрес получателя</th><th>Вес груза</th><th>Дата забора груза</th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => order.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.SenderCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.SenderAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.ReceiverCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.ReceiverAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.Date)
+            </td>
+            <td>
+                <button asp-action="Delete" asp-route-id="@order.Id">X</button>
+            </td>
+        </tr>
+    }
+</table>

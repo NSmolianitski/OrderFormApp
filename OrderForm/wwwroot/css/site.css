@@ -1,0 +1,32 @@
+﻿html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.order-form {
+    background-color: rgba(122, 186, 255, 0.5);
+    width: 500px;
+    padding: 30px;
+}
+
+.btn-primary {
+    margin-top: 10px;
+}
+
+input.input-validation-error {
+    border: 1px solid red;
+}
+
+.validation-summary-errors {
+    color: red;
+}
+
+.field-validation-error {
+    color: red;
+}
