@@ -17,8 +17,7 @@ namespace OrderForm.Controllers
         {
             _context = context;
         }
-
-
+        
         public IActionResult OrderList()
         {
             return View(_context.Orders.ToList());
@@ -26,9 +25,9 @@ namespace OrderForm.Controllers
 
         public IActionResult OrderForm()
         {
-            return View();
+            return View("OrderForm");
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> OrderForm(Order order)
         {
@@ -36,23 +35,28 @@ namespace OrderForm.Controllers
                 ModelState.AddModelError("Date", "Некорректная дата забора груза");
             if (ModelState.IsValid)
             {
+                do
+                {
+                    order.OrderId = Guid.NewGuid();
+                } while (await _context.Orders.AnyAsync(o => o.OrderId == order.OrderId));
+
                 _context.Add(order);
                 await _context.SaveChangesAsync();
+                return RedirectToAction("OrderForm");
             }
-            return View(order);
+            return View("OrderForm", order);
+
         }
         
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            var order = await _context.Orders.FindAsync(id);
-            if (order == null)
+            Order order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
+            if (order != null)
             {
-                return NotFound();
+                _context.Orders.Remove(order);
+                await _context.SaveChangesAsync();
             }
-
-            _context.Remove(order);
-            await _context.SaveChangesAsync();
             return RedirectToAction("OrderList");
         }
     }
