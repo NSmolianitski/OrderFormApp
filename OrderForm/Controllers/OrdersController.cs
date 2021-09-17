@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using OrderForm.Models;
 
 namespace OrderForm.Controllers
@@ -42,7 +40,7 @@ namespace OrderForm.Controllers
 
                 _context.Add(order);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("OrderForm");
+                return RedirectToAction("OrderList");
             }
             return View("OrderForm", order);
 
