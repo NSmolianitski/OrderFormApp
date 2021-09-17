@@ -11,3 +11,6 @@
 
 <img src="/Screenshots/chrome2.png">
 
+Приложение запущено!
+
+<img src="/Screenshots/app.png">
